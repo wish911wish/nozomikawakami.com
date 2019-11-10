@@ -36,12 +36,90 @@
           <h1>Works</h1>
           <h5>My private works.</h5>
         </div>
+        <div class="contentsInner">
+          <div class="articles">
+            <div class="article works">
+              <h2 class="articleTtl">WANNAME</h2>
+              <div class="articleImage">
+                <a href="https://www.wanname.net/">
+                  <img class="imageCover objectFit-contain" src="../assets/wanname.png"/>
+                </a>
+              </div>
+              <div class="articleDescription description">
+                <h3 class="heading">
+                  URL
+                </h3>
+                <a href="https://www.wanname.net/">
+                  <p>
+                    https://www.wanname.net/
+                  </p>
+                </a>
+                <h3 class="">
+                  Summary
+                </h3>
+                <p>
+                  ヘアスタイリスト向けマッチンングアプリ "WANNAME"の開発に参画。サーバサイド・フロントエンドを担当。
+                </p>
+                <h3>
+                  Tool
+                </h3>
+                <p>
+                  Ruby on Rails / HTML / SCSS / Vue.js / Git
+                </p>
+                <h3>
+                  Period
+                </h3>
+                <p>
+                  2019.8 ~ 2019.11
+                </p>
+              </div>
+            </div>
+            <div class="article works">
+              <h2 class="articleTtl">WANNAME</h2>
+              <div class="articleImage">
+                <a href="http://portfolio02fluid.s3-website-ap-northeast-1.amazonaws.com/">
+                  <img class="imageCover objectFit-cover" src="../assets/portfolio01.png"/>
+                </a>
+              </div>
+              <div class="articleDescription description">
+                <h3 class="heading">
+                  URL
+                </h3>
+                <a href="http://portfolio02fluid.s3-website-ap-northeast-1.amazonaws.com/">
+                  <p>
+                    http://portfolio02fluid.s3-website-ap-northeast-1.amazonaws.com/
+                  </p>
+                </a>
+                <h3 class="">
+                  Summary
+                </h3>
+                <p>
+                  ヘアスタイリスト向けマッチンングアプリ "WANNAME"の開発に参画。サーバサイド・フロントエンドを担当。
+                </p>
+                <h3>
+                  Tool
+                </h3>
+                <p>
+                  Ruby on Rails / HTML / SCSS / Vue.js / Git
+                </p>
+                <h3>
+                  Period
+                </h3>
+                <p>
+                  2019.8 ~ 2019.11
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
     </transition>
   </div>
 </template>
 
 <script>
+import works from './works'
+
 export default {
   name: 'HelloWorld',
   data () {
@@ -62,6 +140,11 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
+#wrap{
+  position: relative;
+  height: 100vh;
+}
 
 #mainVisual{
   width: 100vw;
@@ -105,10 +188,10 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 100%;
   width: 100%;
-  top: 0;
+  top: 50%;
   left: 0;
+  margin-top: -8rem;
 }
 
 .contentsTtl h1{
@@ -123,6 +206,10 @@ export default {
 }
 
 @media screen and (max-width: 900px) {
+  .contentsTtl{
+    margin-top: -6rem;
+  }
+
   .contentsTtl h1{
     font-size: 3rem;
     font-weight: bold;
@@ -254,6 +341,79 @@ export default {
     transform: rotate(-45deg) translate(-20px, 20px);
     opacity: 0;
   }
+}
+
+.articleImage{
+  position: relative;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.articleImage:before{
+  content:"";
+  display: block;
+  padding-top: 50%;
+  box-shadow: 0 0 0 1px #ddd;
+}
+
+.imageCover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+}
+
+.objectFit-contain{
+  object-fit: contain;
+}
+
+.objectFit-cover{
+  object-fit: cover;
+}
+
+.articles{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.article{
+  width: 80%;
+  max-width: 800px;
+  margin-top: 6rem;
+}
+
+.articleTtl{
+  width: 100%;
+  margin: 0 0 2rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+  font-size: 4rem;
+  padding: 7px 15px 5px;
+  color: #2c3e50;
+  text-align: left;
+  box-sizing: border-box;
+}
+
+.articleDescription{
+  font-size: 2rem;
+  text-align: left;
+}
+
+.description h3{
+  font-weight: bold;
+  font-size: 2.5rem;
+  margin-bottom: .5rem;
+}
+
+.description p{
+  margin-bottom: 2.5rem;
+  font-size: 1.6rem;
 }
 
 </style>
