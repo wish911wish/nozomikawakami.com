@@ -1,7 +1,26 @@
 <template>
   <div id="wrap">
+    <header class="globalHeader" v-show="!show">
+      <div class="headerInner">
+        <div class="headerIcon">
+        </div>
+        <div>
+          <ul class="headerNavList">
+            <li class="headerNavItem" @click="show = true; show_works = false; show_about=false">
+              <ListItem itemName="Top"/>
+            </li>
+            <li class="headerNavItem" @click="activeSelfWork()">
+              <ListItem itemName="Works"/>
+            </li>
+            <li class="headerNavItem" @click="activeSelfAbout()">
+              <ListItem itemName="About"/>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </header>
     <section id="mainVisual">
-      <div class="scroll">
+      <div class="scroll" v-if="show_works || show_about ">
         <div>
           <div>scroll</div>
           <a class="arrow"></a>
@@ -16,130 +35,109 @@
         </div>
         <div class="topGlobalNav">
           <ul class="contentsList">
-            <li class="contentsListItem" @click="show = !show; show_works = !show_works;">
-              <div class="works">
-                Works
-              </div>
+            <li @click="activeSelfWork()">
+              <ListItem itemName="Works"/>
             </li>
-            <li>
-              <div class="about">
-                About
-              </div>
+            <li @click="activeSelfAbout()">
+              <ListItem itemName="About"/>
             </li>
           </ul>
         </div>
       </div>
     </transition>
     <transition>
-      <section class="works" v-if="show_works">
-        <div class="contentsTtl">
-          <h1>Works</h1>
-          <h5>My private works.</h5>
-        </div>
-        <div class="contentsInner">
-          <div class="articles">
-            <div class="article works">
-              <h2 class="articleTtl">WANNAME</h2>
-              <div class="articleImage">
-                <a href="https://www.wanname.net/">
-                  <img class="imageCover objectFit-contain" src="../assets/wanname.png"/>
-                </a>
-              </div>
-              <div class="articleDescription description">
-                <h3 class="heading">
-                  URL
-                </h3>
-                <a href="https://www.wanname.net/">
-                  <p>
-                    https://www.wanname.net/
-                  </p>
-                </a>
-                <h3 class="">
-                  Summary
-                </h3>
-                <p>
-                  ヘアスタイリスト向けマッチンングアプリ "WANNAME"の開発に参画。サーバサイド・フロントエンドを担当。
-                </p>
-                <h3>
-                  Tool
-                </h3>
-                <p>
-                  Ruby on Rails / HTML / SCSS / Vue.js / Git
-                </p>
-                <h3>
-                  Period
-                </h3>
-                <p>
-                  2019.8 ~ 2019.11
-                </p>
-              </div>
-            </div>
-            <div class="article works">
-              <h2 class="articleTtl">WANNAME</h2>
-              <div class="articleImage">
-                <a href="http://portfolio02fluid.s3-website-ap-northeast-1.amazonaws.com/">
-                  <img class="imageCover objectFit-cover" src="../assets/portfolio01.png"/>
-                </a>
-              </div>
-              <div class="articleDescription description">
-                <h3 class="heading">
-                  URL
-                </h3>
-                <a href="http://portfolio02fluid.s3-website-ap-northeast-1.amazonaws.com/">
-                  <p>
-                    http://portfolio02fluid.s3-website-ap-northeast-1.amazonaws.com/
-                  </p>
-                </a>
-                <h3 class="">
-                  Summary
-                </h3>
-                <p>
-                  ヘアスタイリスト向けマッチンングアプリ "WANNAME"の開発に参画。サーバサイド・フロントエンドを担当。
-                </p>
-                <h3>
-                  Tool
-                </h3>
-                <p>
-                  Ruby on Rails / HTML / SCSS / Vue.js / Git
-                </p>
-                <h3>
-                  Period
-                </h3>
-                <p>
-                  2019.8 ~ 2019.11
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <works v-if="show_works"/>
+    </transition>
+    <transition>
+      <About v-if="show_about"/>
     </transition>
   </div>
 </template>
 
 <script>
-import works from './works'
+import Works from './Works'
+import About from './About'
+import ListItem from './ListItem'
 
 export default {
+  components: {
+    Works,
+    About,
+    ListItem
+  },
   name: 'HelloWorld',
   data () {
     return {
       msg: 'Welcome to Your Vue.js App',
       show: true,
       show_works: false,
+      show_about: false,
       opacity: 1
     }
   },
   methods: {
-    test: function () {
-      this.opacity = 0
+    activeSelfWork: function () {
+      this.removeActive()
+      var target = document.getElementsByClassName('Works')[0]
+      target.classList.add('active')
+      this.show = false
+      this.show_works = true
+      this.show_about = false
+    },
+    activeSelfAbout: function () {
+      this.removeActive()
+      document.getElementsByClassName('About')[0].classList.add('active')
+      this.show = false
+      this.show_works = false
+      this.show_about = true
+    },
+    removeActive: function () {
+      var beforeTarget = document.getElementsByClassName('active')[0]
+      if (beforeTarget !== undefined) {
+        beforeTarget.classList.remove('active')
+      }
     }
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style>
+
+.globalHeader{
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.headerIcon{
+  display: flex;
+  align-items: center;
+  margin-left: 2rem;
+}
+
+.headerInner{
+  display: flex;
+  justify-content: space-between;
+}
+
+.headerNavList{
+  display: flex;
+}
+
+.headerNavItem{
+  width: 6rem;
+}
+
+.headerNavItem {
+  font-size: 1.5rem;
+  margin: 2rem;
+}
+
+.contentsListItem .active{
+  background-color: #2c3e50;
+  color: white;
+}
 
 #wrap{
   position: relative;
@@ -249,26 +247,12 @@ export default {
   }
 }
 
-.contentsList li::before, .contentsList li::after {
-  background-color: rgba(0,0,0, 0.6);
-  position: absolute;
-  content: "";
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  transition: transform 0.5s,
-              cubic-bezier(0.19, 1, 0.22, 1),
-              color 0.5s,
-              transition-delay 0s;
+.globalHeader{
+  z-index: 3;
 }
 
-.contentsList li::before {
-  transform: translateX(104%);
-}
-
-.contentsList li::after {
-  transform: translateX(-104%);
+.contentsList{
+  display: flex;
 }
 
 .contentsList li div{
@@ -393,8 +377,8 @@ export default {
   margin: 0 0 2rem;
   font-weight: bold;
   letter-spacing: 2px;
-  font-size: 4rem;
-  padding: 7px 15px 5px;
+  font-size: 2rem;
+  padding: 7px 0 5px;
   color: #2c3e50;
   text-align: left;
   box-sizing: border-box;
@@ -403,17 +387,37 @@ export default {
 .articleDescription{
   font-size: 2rem;
   text-align: left;
+  margin-bottom: 6rem;
 }
 
-.description h3{
+.description h5{
   font-weight: bold;
-  font-size: 2.5rem;
+  font-size: 2rem;
   margin-bottom: .5rem;
 }
 
+.description h5 {
+  margin-bottom: 1rem;
+}
+
+.description h4 {
+  margin-top: 1rem;
+}
+
 .description p{
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.5rem;
   font-size: 1.6rem;
+  line-height: 2.5rem;
+}
+
+.description a{
+  margin-bottom: 1.5rem;
+  font-size: 1.6rem;
+  line-height: 2.5rem;
+}
+
+.mb-1{
+  margin-bottom: 1rem;
 }
 
 </style>

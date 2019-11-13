@@ -6,103 +6,51 @@
     </div>
     <div class="contentsInner">
       <div class="articles">
-        <div class="article works">
-          <h2 class="articleTtl">WANNAME</h2>
-          <div class="articleImage">
-            <a href="https://www.wanname.net/">
-              <img class="imageCover objectFit-contain" src="../assets/wanname.png"/>
-            </a>
-          </div>
-          <div class="articleDescription description">
-            <h3 class="heading">
-              URL
-            </h3>
-            <a href="https://www.wanname.net/">
-              <p>
-                https://www.wanname.net/
-              </p>
-            </a>
-            <h3 class="">
-              Summary
-            </h3>
-            <p>
-              ヘアスタイリスト向けマッチンングアプリ "WANNAME"の開発に参画。サーバサイド・フロントエンドを担当。
-            </p>
-            <h3>
-              Tool
-            </h3>
-            <p>
-              Ruby on Rails / HTML / SCSS / Vue.js / Git
-            </p>
-            <h3>
-              Period
-            </h3>
-            <p>
-              2019.8 ~ 2019.11
-            </p>
-          </div>
-        </div>
-        <div class="article works">
-          <h2 class="articleTtl">WANNAME</h2>
-          <div class="articleImage">
-            <a href="http://portfolio02fluid.s3-website-ap-northeast-1.amazonaws.com/">
-              <img class="imageCover objectFit-cover" src="../assets/portfolio01.png"/>
-            </a>
-          </div>
-          <div class="articleDescription description">
-            <h3 class="heading">
-              URL
-            </h3>
-            <a href="http://portfolio02fluid.s3-website-ap-northeast-1.amazonaws.com/">
-              <p>
-                http://portfolio02fluid.s3-website-ap-northeast-1.amazonaws.com/
-              </p>
-            </a>
-            <h3 class="">
-              Summary
-            </h3>
-            <p>
-              ヘアスタイリスト向けマッチンングアプリ "WANNAME"の開発に参画。サーバサイド・フロントエンドを担当。
-            </p>
-            <h3>
-              Tool
-            </h3>
-            <p>
-              Ruby on Rails / HTML / SCSS / Vue.js / Git
-            </p>
-            <h3>
-              Period
-            </h3>
-            <p>
-              2019.8 ~ 2019.11
-            </p>
-          </div>
-        </div>
+        <WorksArticle v-for="article in articles" :article="article" :key="article.id"/>
       </div>
     </div>
   </section>
 </template>
 
 <script>
+import WorksArticle from './WorksArticle'
+
 export default {
-  name: 'HelloWorld',
+  components: {
+    WorksArticle
+  },
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App',
-      show: true,
-      show_works: false,
-      opacity: 1
-    }
-  },
-  methods: {
-    test: function () {
-      this.opacity = 0
+      articles: [
+        {
+          id: 1,
+          articleTitle: 'WANNAME',
+          siteURL: 'https://www.wanname.net/',
+          imageURL: 'https://portfolio50.s3-ap-northeast-1.amazonaws.com/static/images/wanname.png',
+          summary: 'ヘアスタイリスト向けマッチンングアプリ "WANNAME"の開発に参画。サーバサイド・フロントエンドを担当。',
+          tool: 'Ruby on Rails / HTML / SCSS / Vue.js / Git',
+          period: '2019.8 ~ 2019.11'
+        },
+        {
+          id: 2,
+          articleTitle: '試作ポートフォリオサイト 01',
+          siteURL: 'http://portfolio02fluid.s3-website-ap-northeast-1.amazonaws.com/',
+          imageURL: 'https://portfolio50.s3-ap-northeast-1.amazonaws.com/static/images/portfolio01.png',
+          summary: 'アニメーション用ライブラリ(GSAP)の練習用。',
+          tool: 'HTML / CSS / GSAP(MorphSVGPlugin.js, TweenLite.js) / Git',
+          period: '2019.8'
+        },
+        {
+          id: 3,
+          articleTitle: '試作ポートフォリオサイト 02',
+          siteURL: 'http://portfolio05-vue-todo.s3-website-ap-northeast-1.amazonaws.com/',
+          imageURL: 'https://portfolio50.s3-ap-northeast-1.amazonaws.com/static/images/portfolio02.png',
+          summary: 'canvasタグを使用したアニメーションの練習用',
+          tool: 'HTML / CSS / GSAP(MorphSVGPlugin.js, TweenLite.js) / Git',
+          period: '2019.9'
+        }
+      ]
     }
   }
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-
-</style>
