@@ -119,6 +119,7 @@ export default {
 .headerInner{
   display: flex;
   justify-content: space-between;
+  background-color: #FFF;
 }
 
 .headerNavList{
