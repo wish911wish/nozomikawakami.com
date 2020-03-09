@@ -1,3 +1,6 @@
+version: 2.1
+orbs:
+  aws-s3: circleci/aws-s3@1.0.15
 jobs:
   build:
     docker:
@@ -19,6 +22,3 @@ jobs:
           arguments: '--dry-run'
           from: bucket/build_asset.txt
           to: 's3://my-s3-bucket-name'
-orbs:
-  aws-s3: circleci/aws-s3@x.y
-version: 2.1
