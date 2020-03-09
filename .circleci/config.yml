@@ -11,16 +11,16 @@ jobs:
       - node/with-cache:
         steps:
           - run: npm install
-      - aws-s3/sync:
-          arguments: |
-            --acl public-read \
-            --cache-control "max-age=86400"
-          aws-access-key-id: $AWS_ACCESS_KEY_ID
-          aws-region: $AWS_REGION
-          aws-secret-access-key: $AWS_SECRET_ACCESS_KEY
-          from: docs
-          overwrite: true
-          to: 's3://portfolio50'
+      # - aws-s3/sync:
+      #     arguments: |
+      #       --acl public-read \
+      #       --cache-control "max-age=86400"
+      #     aws-access-key-id: $AWS_ACCESS_KEY_ID
+      #     aws-region: $AWS_REGION
+      #     aws-secret-access-key: $AWS_SECRET_ACCESS_KEY
+      #     from: docs
+      #     overwrite: true
+      #     to: 's3://portfolio50'
 workflows:
     build-and-test:
       jobs:
