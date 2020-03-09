@@ -1,7 +1,6 @@
 version: 2.1
 orbs:
   node: circleci/node@1.1.6
-  aws-s3: circleci/aws-s3@1.0.15
 jobs:
   build-and-test:
     executor:
@@ -9,19 +8,38 @@ jobs:
     steps:
       - checkout
       - node/with-cache:
-        steps:
-          - run: npm install
-      # - aws-s3/sync:
-      #     arguments: |
-      #       --acl public-read \
-      #       --cache-control "max-age=86400"
-      #     aws-access-key-id: $AWS_ACCESS_KEY_ID
-      #     aws-region: $AWS_REGION
-      #     aws-secret-access-key: $AWS_SECRET_ACCESS_KEY
-      #     from: docs
-      #     overwrite: true
-      #     to: 's3://portfolio50'
+          steps:
+            - run: npm install
+            - run: npm test
 workflows:
     build-and-test:
       jobs:
         - build-and-test
+
+# version: 2.1
+# orbs:
+#   node: circleci/node@1.1.6
+#   aws-s3: circleci/aws-s3@1.0.15
+# jobs:
+#   build-and-test:
+#     executor:
+#       name: node/default
+#     steps:
+#       - checkout
+#       - node/with-cache:
+#         steps:
+#           - run: npm install
+#       - aws-s3/sync:
+#           arguments: |
+#             --acl public-read \
+#             --cache-control "max-age=86400"
+#           aws-access-key-id: $AWS_ACCESS_KEY_ID
+#           aws-region: $AWS_REGION
+#           aws-secret-access-key: $AWS_SECRET_ACCESS_KEY
+#           from: docs
+#           overwrite: true
+#           to: 's3://portfolio50'
+# workflows:
+#     build-and-test:
+#       jobs:
+#         - build-and-test
