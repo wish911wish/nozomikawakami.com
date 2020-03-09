@@ -8,11 +8,9 @@ jobs:
       name: node/default
     steps:
       - checkout
-      # - run: mkdir bucket && echo "lorem ipsum" > bucket/build_asset.txt
       - node/with-cache:
         steps:
           - run: npm install
-          # - run: npm test
       - aws-s3/sync:
           arguments: |
             --acl public-read \
@@ -23,10 +21,6 @@ jobs:
           from: docs
           overwrite: true
           to: 's3://portfolio50'
-      # - aws-s3/copy:
-      #     arguments: '--dry-run'
-      #     from: bucket/build_asset.txt
-      #     to: 's3://portfolio50'
 workflows:
     build-and-test:
       jobs:
