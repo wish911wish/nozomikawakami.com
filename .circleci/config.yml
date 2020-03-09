@@ -8,6 +8,7 @@ jobs:
     steps:
       - checkout
       - run: mkdir bucket && echo "lorem ipsum" > bucket/build_asset.txt
+      - run: echo hello!!
       - aws-s3/sync:
           arguments: |
             --acl public-read \
