@@ -55,4 +55,3 @@ workflows:
           filters:
             branches:
               only: master
-</s3>
