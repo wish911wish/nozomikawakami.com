@@ -4,7 +4,7 @@ orbs:
 jobs:
   build:
     environment:
-      AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+      AWS_ACCESS_KEY_ID: AWS_ACCESS_KEY_ID
     docker:
       - image: 'cimg/python:3.6'
     steps:
