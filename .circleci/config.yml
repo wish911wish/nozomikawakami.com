@@ -3,10 +3,10 @@ orbs:
   aws-s3: circleci/aws-s3@1.0.15
 jobs:
   build:
-    environment:
-      AWS_ACCESS_KEY_ID: AWS_ACCESS_KEY_ID
     docker:
       - image: 'cimg/python:3.6'
+    environment:
+      AWS_ACCESS_KEY_ID: "AWS_ACCESS_KEY_ID"  
     steps:
       - checkout
       - run:
