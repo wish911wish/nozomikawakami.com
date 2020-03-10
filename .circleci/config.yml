@@ -11,9 +11,8 @@ jobs:
     steps:
       - checkout
       - run:
-        command: echo $AWS_ACCESS_KEY_ID 
-      - run:
-        command: echo $AWS_ACCESS_KEY_ID
+        name: Running tests
+        command: echo "aaa"
       - run: mkdir bucket && echo "lorem ipsum" > bucket/build_asset.txt
       - run: echo hello!!
       # - run: echo "export AWS_ACCESS_KEY_ID=123" >> $BASH_ENV
