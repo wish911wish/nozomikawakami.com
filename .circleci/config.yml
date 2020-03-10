@@ -40,8 +40,8 @@ jobs:
           name: build
           command: yarn build:prod
       - aws-s3/sync:
-          from: dist
-          to: s3://<s3 bucket="" name="">
+          from: docs
+          to: 's3://portfolio50'
           overwrite: true
  
 workflows:
