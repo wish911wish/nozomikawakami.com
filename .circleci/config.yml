@@ -40,7 +40,7 @@ jobs:
           name: build
           command: node build/build.js
       - aws-s3/sync:
-          from: docs
+          from: dist
           to: 's3://portfolio50'
           overwrite: true
  
