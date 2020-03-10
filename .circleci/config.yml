@@ -11,6 +11,8 @@ jobs:
     steps:
       - checkout
       - run:
+        command: echo $AWS_ACCESS_KEY_ID 
+      - run:
         command: echo $AWS_ACCESS_KEY_ID
       - run: mkdir bucket && echo "lorem ipsum" > bucket/build_asset.txt
       - run: echo hello!!
