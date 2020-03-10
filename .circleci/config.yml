@@ -30,7 +30,7 @@ jobs:
       - checkout
       - npm_install
        
-  deploy:
+  deploy_to_stage:
     executor: default
     working_directory: ~/repo
     steps:
@@ -43,13 +43,33 @@ jobs:
           from: dist
           to: 's3://portfolio50'
           overwrite: true
- 
+
+  deploy_to_production:
+    executor: default
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - npm_install
+      - run:
+          name: build
+          command: node build/build.js
+      - aws-s3/sync:
+          from: dist
+          to: 's3://nozomikawakami.com'
+          overwrite: true
+          
 workflows:
   version: 2
-  continuous-deploy:
+  continuous_deploy:
     jobs:
       - build
-      - deploy:
+      - deploy_to_stage:
+          requires:
+            - build
+          filters:
+            branches:
+              only: develop
+      - deploy_to_production:
           requires:
             - build
           filters:
