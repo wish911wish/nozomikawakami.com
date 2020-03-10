@@ -378,7 +378,7 @@ export default {
   margin: 0 0 2rem;
   font-weight: bold;
   letter-spacing: 2px;
-  font-size: 2rem;
+  font-size: 3rem;
   padding: 7px 0 5px;
   color: #2c3e50;
   text-align: left;
@@ -419,6 +419,12 @@ export default {
 
 .mb-1{
   margin-bottom: 1rem;
+}
+
+.about-section{
+  margin-bottom: 2rem;
+  text-align: left;
+  padding: 0 2rem;
 }
 
 </style>
