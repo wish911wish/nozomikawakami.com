@@ -3,13 +3,13 @@ orbs:
   aws-s3: circleci/aws-s3@1.0.15
 jobs:
   build:
+    environment:
+      AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
     docker:
       - image: 'cimg/python:3.6'
     steps:
       - checkout
       - run:
-        environment:
-          AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
       - run: mkdir bucket && echo "lorem ipsum" > bucket/build_asset.txt
       - run: echo hello!!
       # - run: echo "export AWS_ACCESS_KEY_ID=123" >> $BASH_ENV
