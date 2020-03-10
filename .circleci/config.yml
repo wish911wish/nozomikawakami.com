@@ -5,15 +5,14 @@ jobs:
   build:
     docker:
       - image: 'cimg/python:3.6'
-    # environment:
-    #   AWS_ACCESS_KEY_ID: "AWS_ACCESS_KEY_ID"  
+    environment:
+      AWS_ACCESS_KEY_ID: "AWS_ACCESS_KEY_ID"  
     steps:
       - checkout
-      - run:
       - run: mkdir bucket && echo "lorem ipsum" > bucket/build_asset.txt
       - run: echo hello!!
-      - run: echo "export AWS_ACCESS_KEY_ID=123" >> $BASH_ENV
-      - run: echo "export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID" >> $BASH_ENV
+      # - run: echo "export AWS_ACCESS_KEY_ID=123" >> $BASH_ENV
+      # - run: echo "export AWS_ACCESS_KEY_ID=321" >> $BASH_ENV
       - run: echo $AWS_ACCESS_KEY_ID
       - aws-s3/sync:
           arguments: |
