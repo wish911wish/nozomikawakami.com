@@ -1,6 +1,6 @@
 # nozomikawakami.com
 
-> My groundbreaking Nuxt.js project
+> My stellar Nuxt.js project
 
 ## Build Setup
 

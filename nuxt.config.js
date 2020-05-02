@@ -1,7 +1,7 @@
 import colors from 'vuetify/es5/util/colors'
 
 export default {
-  mode: 'spa',
+  mode: 'universal',
   /*
   ** Headers of the page
   */
@@ -36,7 +36,7 @@ export default {
   */
   buildModules: [
     '@nuxt/typescript-build',
-    '@nuxtjs/vuetify',
+    '@nuxtjs/vuetify'
   ],
   /*
   ** Nuxt.js modules
@@ -71,7 +71,15 @@ export default {
     /*
     ** You can extend webpack config here
     */
-    extend (config, ctx) {
+    // extend (config, ctx) {
+    // }
+  },
+  /*
+  ** Runtime lint
+  */
+  typescript: {
+    typeCheck: {
+      eslint: true
     }
   }
 }
