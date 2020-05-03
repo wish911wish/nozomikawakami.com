@@ -38,7 +38,7 @@ jobs:
       - npm_install
       - run:
           name: build
-          command: node build/build.js
+          command: npm run build
       - aws-s3/sync:
           from: dist
           to: 's3://portfolio50'
