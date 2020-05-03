@@ -5,7 +5,7 @@
     </h2>
     <div v-for="career in careers" :key="career.id" class="career about-section">
       <div class="name">
-        {{ career.name }} : {{ Date.parse(career.start) | moment("YYYY.MM") }} ~ {{ Date.parse(career.end) | moment("YYYY.MM") }}
+        {{ career.name }} : {{ career.start }} ~ {{ career.end }}
       </div>
       <div>
         <p class="summary">
@@ -18,7 +18,9 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
+import moment from 'moment'
 
+@Component
 export default class Career extends Vue {
   careers: {
     id: number
@@ -31,22 +33,15 @@ export default class Career extends Vue {
       id: 1,
       name: '個人事業主',
       summary: '通信事業向けCRMシステムの開発案件に参画中。Laravel,React.jsを使用したフロント・サーバーサイドを担当。',
-      start: '2020-02-01T00:00:00',
-      end: new Date().toISOString()
+      start: moment('2020-02-01T00:00:00').format('YYYY.MM'),
+      end: moment(new Date().toISOString()).format('YYYY.MM')
     },
     {
       id: 2,
       name: '株式会社アグレックス',
-      summary: '金融系業務アプリケーションの開発・保守を担当。\n１〜２年目は某信託銀行に常駐し、EUCアプリケーションの開発業務の要件定義〜テスト工程を担当。\n３年目から金融企業向けにSalesforce.comの導入支援・開発業務を担当。',
-      start: '2016-08-01T00:00:00',
-      end: '2020-01-01T00:00:00'
-    },
-    {
-      id: 3,
-      name: 'test',
-      summary: 'test summary',
-      start: '2020-05-01T00:00:00',
-      end: '9999-01-01T00:00:00'
+      summary: '金融系業務アプリケーションの開発・保守を担当',
+      start: moment('2016-08-01T00:00:00').format('YYYY.MM'),
+      end: moment('2020-01-01T00:00:00').format('YYYY.MM'),
     }
   ]
 }

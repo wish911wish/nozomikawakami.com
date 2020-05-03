@@ -15,6 +15,7 @@
   "dependencies": {
     "@nuxt/typescript-runtime": "^0.4.0",
     "@types/jest": "^25.2.1",
+    "moment": "^2.25.1",
     "nuxt": "^2.0.0",
     "nuxt-webfontloader": "^1.1.0",
     "vue-property-decorator": "^8.4.2"

@@ -16,7 +16,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-
+@Component
 export default class Media extends Vue {
 
   links: {
