@@ -39,8 +39,8 @@ jobs:
 
       - run:
           working_directory: next-with-typescript
-          name: build
-          command: npm run build
+          name: export
+          command: npm run export
 
       - aws-s3/sync:
           from: next-with-typescript/out
