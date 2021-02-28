@@ -28,22 +28,22 @@ jobs:
     steps:
       - checkout
       - run:
-        name: npm install
-        command: npm install
+          name: npm install
+          command: npm install
 
       - save_cache:
-        key: dependency-cache-{{ checksum "package.json" }}
-        paths:
-          - node_modules
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - node_modules
 
       - run:
-        name: build
-        command: npm run build
+          name: build
+          command: npm run build
 
       - aws-s3/sync:
-        from: out
-        to: "s3://portfolio50"
-        overwrite: true
+          from: out
+          to: "s3://portfolio50"
+          overwrite: true
 
   deploy_to_stage:
     executor: default
