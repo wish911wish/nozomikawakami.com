@@ -108,10 +108,14 @@ workflows:
     jobs:
       - build
       - deploy_to_stage:
-        filters:
-          branches:
-            only: develop
+          requires:
+            - build
+          filters:
+            branches:
+              only: develop
       - deploy_to_production:
-        filters:
-          branches:
-            only: master
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
