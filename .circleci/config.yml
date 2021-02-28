@@ -44,7 +44,7 @@ jobs:
 
       - aws-s3/sync:
           from: next-with-typescript/out
-          to: "s3://portfolio50"
+          to: "s3://staging.nozomikawakami.com"
           overwrite: true
 
   deploy_to_stage:
