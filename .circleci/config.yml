@@ -29,7 +29,7 @@ jobs:
       - checkout
 
       - restore_cache:
-        key: dependency-cache-{{ checksum "next-with-typescript/package.json" }}
+          key: dependency-cache-{{ checksum "next-with-typescript/package.json" }}
 
       - run:
           working_directory: next-with-typescript
@@ -57,27 +57,27 @@ jobs:
       - checkout
 
       - restore_cache:
-        key: dependency-cache-{{ checksum "next-with-typescript/package.json" }}
+          key: dependency-cache-{{ checksum "next-with-typescript/package.json" }}
 
       - run:
-        working_directory: next-with-typescript
-        name: npm install
-        command: npm install
+          working_directory: next-with-typescript
+          name: npm install
+          command: npm install
 
       - save_cache:
-        key: dependency-cache-{{ checksum "next-with-typescript/package.json" }}
-        paths:
-          - next-with-typescript/node_modules
+          key: dependency-cache-{{ checksum "next-with-typescript/package.json" }}
+          paths:
+            - next-with-typescript/node_modules
 
       - run:
-        working_directory: next-with-typescript
-        name: export
-        command: npm run export
+          working_directory: next-with-typescript
+          name: export
+          command: npm run export
 
       - aws-s3/sync:
-        from: next-with-typescript/out
-        to: "s3://staging.nozomikawakami.com"
-        overwrite: true
+          from: next-with-typescript/out
+          to: "s3://staging.nozomikawakami.com"
+          overwrite: true
 
   deploy_to_production:
     executor: default
