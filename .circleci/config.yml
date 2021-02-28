@@ -25,6 +25,7 @@ commands:
 jobs:
   build:
     executor: default
+    working_directory: next-with-typescript
     steps:
       - checkout
       - run:
