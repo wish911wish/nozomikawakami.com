@@ -25,24 +25,25 @@ commands:
 jobs:
   build:
     executor: default
-    working_directory: next-with-typescript
     steps:
       - checkout
       - run:
+          working_directory: next-with-typescript
           name: npm install
           command: npm install
 
       - save_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
+          key: dependency-cache-{{ checksum "next-with-typescript/package.json" }}
           paths:
-            - node_modules
+            - next-with-typescript/node_modules
 
       - run:
+          working_directory: next-with-typescript
           name: build
           command: npm run build
 
       - aws-s3/sync:
-          from: out
+          from: next-with-typescript/out
           to: "s3://portfolio50"
           overwrite: true
 
