@@ -1,14 +1,14 @@
 version: 2.1
- 
+
 orbs:
   aws-s3: circleci/aws-s3@1.0.11
- 
+
 executors:
   default:
     docker:
       - image: circleci/node:10
       - image: circleci/python:2.7
- 
+
 commands:
   npm_install:
     steps:
@@ -20,19 +20,34 @@ commands:
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
-              - node_modules
- 
+            - node_modules
+
 jobs:
   build:
     executor: default
-    working_directory: ~/repo
     steps:
       - checkout
-      - npm_install
-       
+      - run:
+        name: npm install
+        command: npm install
+
+      - save_cache:
+        key: dependency-cache-{{ checksum "package.json" }}
+        paths:
+          - node_modules
+
+      - run:
+        name: build
+        command: npm run build
+
+      - aws-s3/sync:
+        from: out
+        to: "s3://portfolio50"
+        overwrite: true
+
   deploy_to_stage:
     executor: default
-    working_directory: ~/repo
+    working_directory: ~/workspace
     steps:
       - checkout
       - npm_install
@@ -41,12 +56,12 @@ jobs:
           command: npm run build
       - aws-s3/sync:
           from: .nuxt
-          to: 's3://portfolio50'
+          to: "s3://portfolio50"
           overwrite: true
 
   deploy_to_production:
     executor: default
-    working_directory: ~/repo
+    working_directory: ~/workspace
     steps:
       - checkout
       - npm_install
@@ -55,9 +70,9 @@ jobs:
           command: node build/build.js
       - aws-s3/sync:
           from: dist
-          to: 's3://nozomikawakami.com'
+          to: "s3://nozomikawakami.com"
           overwrite: true
-          
+
 workflows:
   version: 2
   continuous_deploy:
