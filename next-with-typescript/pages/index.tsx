@@ -1,5 +1,4 @@
 import Head from 'next/head'
-// import Image from 'next/image'
 
 export const Home = (): JSX.Element => (
   <div className="container">
@@ -9,7 +8,7 @@ export const Home = (): JSX.Element => (
     </Head>
 
     <main>
-      <h1 className="title">
+      <h1 className="title bg-yellow-400">
         Welcome to <a href="https://nextjs.org">Next.js!</a>
       </h1>
 
