@@ -57,12 +57,7 @@ jobs:
       - checkout
 
       - attach_workspace:
-          at: next-with-typescript/out
-
-      - run:
-          working_directory: test
-          name: test
-          command: ls -l
+          at: next-with-typescript
 
       - aws-s3/sync:
           from: next-with-typescript/out
