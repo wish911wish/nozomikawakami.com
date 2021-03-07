@@ -6,7 +6,7 @@ orbs:
 executors:
   default:
     docker:
-      - image: circleci/node:10
+      - image: circleci/node:14
       - image: circleci/python:2.7
 
 commands:
