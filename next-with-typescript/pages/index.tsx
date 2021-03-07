@@ -8,7 +8,7 @@ export const Home = (): JSX.Element => (
     </Head>
 
     <main>
-      <h1 className="title bg-yellow-400">
+      <h1 className="title bg-red-400">
         Welcome to <a href="https://nextjs.org">Next.js!</a>
       </h1>
 
