@@ -62,7 +62,7 @@ jobs:
       - run:
           working_directory: test
           name: test
-          command: ls -l next-with-typescript
+          command: ls -l
 
       - aws-s3/sync:
           from: next-with-typescript/out
