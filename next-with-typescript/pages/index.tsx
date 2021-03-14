@@ -2,8 +2,8 @@ import Head from 'next/head'
 import * as THREE from 'three'
 import { Canvas } from 'react-three-fiber'
 import React, { useEffect } from 'react'
-import { useSprings, a } from 'react-spring/three'
-import { GeometryArg } from '../interface/interface'
+import { useSprings, a } from 'react-spring/three.cjs'
+import { GeometryArg, RandomData } from '../interface/interface'
 
 const number = 35
 const colors = [
@@ -14,12 +14,15 @@ const colors = [
   'lightpink',
   'lightblue',
 ]
-const random = (i) => {
+const random = (i: number): RandomData => {
   const r = Math.random()
-  // THREE.
 
   return {
-    position: [100 - Math.random() * 200, 100 - Math.random() * 200, i * 1.5],
+    position: new THREE.Vector3(
+      100 - Math.random() * 200,
+      100 - Math.random() * 200,
+      i * 1.5
+    ),
     color: colors[Math.round(Math.random() * (colors.length - 1))],
     scale: [1 + r * 14, 1 + r * 14, 1],
     rotation: [0, 0, THREE.MathUtils.degToRad(Math.round(Math.random()) * 45)],

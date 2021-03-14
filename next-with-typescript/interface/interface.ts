@@ -9,3 +9,10 @@ export interface GeometryArg {
     depthSegments?: number
   ]
 }
+
+export interface RandomData {
+  position: THREE.Vector3
+  color: any
+  scale: any
+  rotation: any
+}
