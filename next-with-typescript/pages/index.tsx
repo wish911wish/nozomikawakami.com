@@ -3,6 +3,7 @@ import { Canvas } from 'react-three-fiber'
 import React, { useEffect } from 'react'
 import { useSprings, a } from 'react-spring/three.cjs'
 import { GeometryArg, RandomData } from '../interface/interface'
+import { throttle } from 'lodash'
 
 const number = 35
 const colors = [
@@ -85,13 +86,49 @@ const Lights = (): JSX.Element => {
 }
 
 export const Home = (): JSX.Element => {
-  const worksRef = React.createRef<HTMLDivElement>()
-  const scrollToWorks = () => {
-    worksRef.current.scrollIntoView({
+  const worksRef = React.useRef(null)
+  const profileRef = React.useRef(null)
+  const aboutRef = React.useRef(null)
+  const refs = [worksRef, profileRef, aboutRef]
+  const [refIndex, setRefIndex] = React.useState<number>(0)
+
+  const setPosition = (direction: -1 | 1) => {
+    setRefIndex((prev) => {
+      const newIndex = prev + direction
+      if (newIndex < 0 || refs.length <= newIndex) {
+        return prev
+      } else {
+        return newIndex
+      }
+    })
+  }
+  const throttleSetPosition = throttle(setPosition, 1000, {
+    trailing: false,
+  })
+  const throttleScrollToWorks = React.useCallback(throttleSetPosition, [])
+
+  React.useEffect(() => {
+    document.addEventListener(
+      'mousewheel',
+      (e: WheelEvent) => {
+        e.preventDefault()
+
+        if (e.deltaY < 0) {
+          throttleScrollToWorks(-1)
+        } else if (e.deltaY > 0) {
+          throttleScrollToWorks(1)
+        }
+      },
+      { passive: false }
+    )
+  }, [])
+
+  React.useEffect(() => {
+    refs[refIndex].current.scrollIntoView({
       behavior: 'smooth',
       block: 'start',
     })
-  }
+  }, [refIndex])
 
   return (
     <>
@@ -101,111 +138,9 @@ export const Home = (): JSX.Element => {
           <Content />
         </Canvas>
       </div>
-      <div className="z-10 relative">
+      <div className="z-10 h-screen relative overflow-scroll">
         <div className="container">
-          <main>
-            <h1 className="title bg-red-400">
-              Welcome to <a href="https://nextjs.org">Next.js!</a>
-            </h1>
-
-            <p className="description">
-              Get started by editing <code>pages/index.tsx</code>
-            </p>
-
-            <button
-              onClick={() => {
-                window.alert('With typescript and Jest')
-              }}
-            >
-              Test Button
-            </button>
-
-            <div className="grid">
-              <div className="card" onClick={scrollToWorks}>
-                <h3>スクロールする &rarr;</h3>
-                <p>スクロールしますよ。</p>
-              </div>
-              <a href="https://nextjs.org/docs" className="card">
-                <h3>Documentation &rarr;</h3>
-                <p>Find in-depth information about Next.js features and API.</p>
-              </a>
-
-              <a href="https://nextjs.org/learn" className="card">
-                <h3>Learn &rarr;</h3>
-                <p>
-                  Learn about Next.js in an interactive course with quizzes!
-                </p>
-              </a>
-
-              <a
-                href="https://github.com/vercel/next.js/tree/master/examples"
-                className="card"
-              >
-                <h3>Examples &rarr;</h3>
-                <p>Discover and deploy boilerplate example Next.js projects.</p>
-              </a>
-
-              <a
-                href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-                className="card"
-              >
-                <h3>Deploy &rarr;</h3>
-                <p>
-                  Instantly deploy your Next.js site to a public URL with
-                  Vercel.
-                </p>
-              </a>
-            </div>
-
-            <h1 className="title bg-red-400" ref={worksRef}>
-              Welcome to <a href="https://nextjs.org">Next.js!</a>
-            </h1>
-
-            <p className="description">
-              Get started by editing <code>pages/index.tsx</code>
-            </p>
-
-            <button
-              onClick={() => {
-                window.alert('With typescript and Jest')
-              }}
-            >
-              Test Button
-            </button>
-
-            <div className="grid">
-              <a href="https://nextjs.org/docs" className="card">
-                <h3>Documentation &rarr;</h3>
-                <p>Find in-depth information about Next.js features and API.</p>
-              </a>
-
-              <a href="https://nextjs.org/learn" className="card">
-                <h3>Learn &rarr;</h3>
-                <p>
-                  Learn about Next.js in an interactive course with quizzes!
-                </p>
-              </a>
-
-              <a
-                href="https://github.com/vercel/next.js/tree/master/examples"
-                className="card"
-              >
-                <h3>Examples &rarr;</h3>
-                <p>Discover and deploy boilerplate example Next.js projects.</p>
-              </a>
-
-              <a
-                href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-                className="card"
-              >
-                <h3>Deploy &rarr;</h3>
-                <p>
-                  Instantly deploy your Next.js site to a public URL with
-                  Vercel.
-                </p>
-              </a>
-            </div>
-
+          <main ref={worksRef}>
             <h1 className="title bg-red-400">
               Welcome to <a href="https://nextjs.org">Next.js!</a>
             </h1>
@@ -255,7 +190,56 @@ export const Home = (): JSX.Element => {
               </a>
             </div>
 
-            <h1 className="title bg-red-400">
+            <h1 className="title bg-red-200" ref={profileRef}>
+              Welcome to <a href="https://nextjs.org">Next.js!</a>
+            </h1>
+
+            <p className="description">
+              Get started by editing <code>pages/index.tsx</code>
+            </p>
+
+            <button
+              onClick={() => {
+                window.alert('With typescript and Jest')
+              }}
+            >
+              Test Button
+            </button>
+
+            <div className="grid">
+              <a href="https://nextjs.org/docs" className="card">
+                <h3>Documentation &rarr;</h3>
+                <p>Find in-depth information about Next.js features and API.</p>
+              </a>
+
+              <a href="https://nextjs.org/learn" className="card">
+                <h3>Learn &rarr;</h3>
+                <p>
+                  Learn about Next.js in an interactive course with quizzes!
+                </p>
+              </a>
+
+              <a
+                href="https://github.com/vercel/next.js/tree/master/examples"
+                className="card"
+              >
+                <h3>Examples &rarr;</h3>
+                <p>Discover and deploy boilerplate example Next.js projects.</p>
+              </a>
+
+              <a
+                href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+                className="card"
+              >
+                <h3>Deploy &rarr;</h3>
+                <p>
+                  Instantly deploy your Next.js site to a public URL with
+                  Vercel.
+                </p>
+              </a>
+            </div>
+
+            <h1 className="title bg-red-400" ref={aboutRef}>
               Welcome to <a href="https://nextjs.org">Next.js!</a>
             </h1>
 
