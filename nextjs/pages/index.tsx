@@ -10,7 +10,7 @@ type ImageLoaderProps = {
 }
 
 const myLoader = (param: ImageLoaderProps) => {
-  return `/_next/image?url=${param.src}&w=${param.width}&q=${param.quality || 75}`
+  return `${param.src}`
 }
 
 const Home: NextPage = () => {
