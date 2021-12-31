@@ -13,10 +13,7 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 16.x
-      - name: Install NPM packages
-        run: ls
-      - name: Build app
-        run: ls
+      - run: ls
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
