@@ -1,5 +1,10 @@
 name: GitHub Actions Demo
 on: [push]
+
+defaults:
+  run:
+    working-directory: nextjs
+
 jobs:
   Deploy-gh-pages:
     runs-on: ubuntu-latest
@@ -10,10 +15,8 @@ jobs:
           node-version: 16.x
       - name: Install NPM packages
         run: ls
-        working-directory: nextjs
       - name: Build app
         run: ls
-        working-directory: nextjs
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
