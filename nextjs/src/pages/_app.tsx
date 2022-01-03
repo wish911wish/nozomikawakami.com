@@ -1,9 +1,10 @@
 import "styles/reset.css";
 import "styles/globals.css";
 import Head from "next/head";
+import { AnimatePresence } from "framer-motion";
 import type { AppProps } from "next/app";
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps, router }: AppProps) {
   return (
     <>
       <Head>
@@ -12,7 +13,9 @@ function MyApp({ Component, pageProps }: AppProps) {
           rel="stylesheet"
         ></link>
       </Head>
-      <Component {...pageProps} />
+      <AnimatePresence exitBeforeEnter initial={false}>
+        <Component {...pageProps} key={router.route} />
+      </AnimatePresence>
     </>
   );
 }
