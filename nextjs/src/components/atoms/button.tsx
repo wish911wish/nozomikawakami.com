@@ -1,5 +1,6 @@
 import * as React from "react";
 import { css } from "@emotion/react";
+import { fontSize } from "styles/variables";
 
 const container = css({
   fontSize: 14,
@@ -51,6 +52,7 @@ const rightStyleOver = css(decoration, {
 
 type Props = {
   text: string;
+  size?: "xl" | "lg" | "md" | "sm";
 };
 
 const Button: React.FC<Props> = (props: Props) => {
@@ -63,10 +65,20 @@ const Button: React.FC<Props> = (props: Props) => {
       onMouseLeave={() => setMouseOver(false)}
     >
       <div css={mouseOver ? rightStyleOver : rightStyle} />
-      <div css={textStyle}>{props.text}</div>
+      <div
+        css={css(textStyle, {
+          fontSize: fontSize[props.size || "md"],
+        })}
+      >
+        {props.text}
+      </div>
       <div css={mouseOver ? leftStyleOver : leftStyle} />
     </div>
   );
+};
+
+Button.defaultProps = {
+  size: "md",
 };
 
 export default Button;
