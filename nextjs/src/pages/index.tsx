@@ -44,12 +44,16 @@ const Home: NextPage = () => {
       </div>
       <div css={menu}>
         <div css={menuList}>
-          <Link href="#">
+          <Link href="/works">
             <a>
-              <Button text="Works" />
+              <Button text="Works" size="xl" />
             </a>
           </Link>
-          <Heading4 text="About" />
+          <Link href="/about">
+            <a>
+              <Button text="About" size="xl" />
+            </a>
+          </Link>
         </div>
       </div>
     </main>
