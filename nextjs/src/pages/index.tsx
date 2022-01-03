@@ -1,11 +1,10 @@
 import type { NextPage } from "next";
 import Link from "next/link";
 import { css } from "@emotion/react";
-import Heading1 from "components/atoms/heading1";
 import Heading2 from "components/atoms/heading2";
 import Heading4 from "components/atoms/heading4";
 import Button from "components/atoms/button";
-import Paragraph from "components/atoms/paragraph";
+import IndexLayout from "components/template/indexLayout";
 
 const main = css({
   height: "100vh",
@@ -37,26 +36,28 @@ const menuList = css({
 
 const Home: NextPage = () => {
   return (
-    <main css={main}>
-      <div css={title}>
-        <Heading2 text="Be honest with myself." />
-        <Heading4 text="Nozomi Kawakami" />
-      </div>
-      <div css={menu}>
-        <div css={menuList}>
-          <Link href="/works">
-            <a>
-              <Button text="Works" size="xl" />
-            </a>
-          </Link>
-          <Link href="/about">
-            <a>
-              <Button text="About" size="xl" />
-            </a>
-          </Link>
+    <IndexLayout>
+      <div css={main}>
+        <div css={title}>
+          <Heading2 text="Be honest with myself." />
+          <Heading4 text="Nozomi Kawakami" />
+        </div>
+        <div css={menu}>
+          <div css={menuList}>
+            <Link href="/works">
+              <a>
+                <Button text="Works" size="xl" />
+              </a>
+            </Link>
+            <Link href="/about">
+              <a>
+                <Button text="About" size="xl" />
+              </a>
+            </Link>
+          </div>
         </div>
       </div>
-    </main>
+    </IndexLayout>
   );
 };
 

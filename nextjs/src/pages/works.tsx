@@ -16,12 +16,10 @@ const title = css({
 const Home: NextPage = () => {
   return (
     <Layout>
-      <main>
-        <div css={title}>
-          <Heading2 text="Works" />
-          <Heading4 text="My works." />
-        </div>
-      </main>
+      <div css={title}>
+        <Heading2 text="Works" />
+        <Heading4 text="My works." />
+      </div>
     </Layout>
   );
 };

@@ -1,7 +1,6 @@
 import type { NextPage } from "next";
 import { css } from "@emotion/react";
 import Heading2 from "components/atoms/heading2";
-import Heading4 from "components/atoms/heading4";
 import Layout from "components/template/layout";
 
 const title = css({
@@ -16,11 +15,9 @@ const title = css({
 const Home: NextPage = () => {
   return (
     <Layout>
-      <main>
-        <div css={title}>
-          <Heading2 text="About" />
-        </div>
-      </main>
+      <div css={title}>
+        <Heading2 text="About" />
+      </div>
     </Layout>
   );
 };
