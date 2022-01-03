@@ -1,9 +1,10 @@
 import * as React from "react";
 import { css } from "@emotion/react";
+import { fontSize } from "styles/variables";
 
 const style = css({
-  fontSize: 16,
-  lineHeight: 1,
+  fontSize: fontSize.md,
+  lineHeight: 1.5,
 });
 
 type Props = {
