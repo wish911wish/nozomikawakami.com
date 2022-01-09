@@ -2,8 +2,9 @@ interface Work {
   id: number;
   imageUrl: string;
   name: string;
-  periodEnd: Date;
   periodStart: Date;
+  periodEnd: Date | null;
+  projectScale: string;
   role: string;
   summary: string;
   technicalSkills: string;
