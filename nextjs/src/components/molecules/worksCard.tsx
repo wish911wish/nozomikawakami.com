@@ -3,12 +3,6 @@ import { css } from "@emotion/react";
 import Work from "interfaces/work";
 import Image from "components/atoms/Image";
 
-const style = css({
-  fontSize: 14,
-  lineHeight: 1,
-  padding: [8, 16],
-});
-
 type Props = {
   work: Work;
 };
@@ -18,9 +12,6 @@ const worksCard = css({
 });
 
 const WorksCard: React.FC<Props> = (props: Props) => {
-  const start = `${props.work.periodStart.getFullYear()}/${
-    props.work.periodStart.getMonth() + 1
-  }/${props.work.periodStart.getDate()}`;
   return (
     <div css={worksCard}>
       <Image
@@ -30,7 +21,14 @@ const WorksCard: React.FC<Props> = (props: Props) => {
         height={200}
       />
       <p>{props.work.name}</p>
-      <p>{start}</p>
+      <p>
+        {props.work.technicalSkills.slice(0, 3).map((s, index) => (
+          <span key={s}>
+            {s}
+            {index === 2 ? "" : " / "}
+          </span>
+        ))}
+      </p>
     </div>
   );
 };

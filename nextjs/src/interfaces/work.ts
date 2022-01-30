@@ -7,7 +7,7 @@ interface Work {
   projectScale: string;
   role: string;
   summary: string;
-  technicalSkills: string;
+  technicalSkills: string[];
   url: string;
 }
 

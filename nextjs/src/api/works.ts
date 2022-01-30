@@ -12,7 +12,7 @@ export const getWorks = async (): Promise<Work[]> => {
     projectScale: String(r.project_scale),
     role: String(r.role),
     summary: String(r.summary),
-    technicalSkills: String(r.technical_skills),
+    technicalSkills: String(r.technical_skills).split(","),
     url: String(r.url),
   }));
   works.sort((first, second) => {

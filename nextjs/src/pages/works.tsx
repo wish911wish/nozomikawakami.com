@@ -3,6 +3,7 @@ import type { NextPage } from "next";
 import { css } from "@emotion/react";
 import Heading2 from "components/atoms/heading2";
 import Heading4 from "components/atoms/heading4";
+import ScrollArrow from "components/molecules/scrollArrow";
 import WorksCard from "components/molecules/worksCard";
 import Layout from "components/template/layout";
 import Work from "interfaces/work";
@@ -29,21 +30,14 @@ const scroll = css({
   justifyContent: "end",
 });
 
-const arrow = css({
-  position: "absolute",
-  width: 24,
-  height: 24,
-  marginLeft: -12,
-  borderLeft: "3px solid #2c3e50",
-  borderBottom: "3px solid#2c3e50",
-  transform: "rotate(-45deg)",
-  animation: "sdb 1.5s infinite",
-  boxSizing: "border-box",
+const arrowContainer = css({
+  display: "flex",
+  justifyContent: "center",
+  paddingTop: 12,
 });
 
 const worksList = css({
-  marginTop: 120,
-  marginBottom: 24,
+  padding: "120px 24px 24px 24px",
   display: "flex",
   justifyContent: "center",
   flexWrap: "wrap",
@@ -57,11 +51,13 @@ const worksCard = css({
 
 const Home: NextPage = () => {
   const [works, setWorks] = React.useState<Work[]>([]);
+  const [loading, setLoading] = React.useState<boolean>(true);
 
   React.useEffect(() => {
     (async () => {
       const worksData = await getWorks();
       setWorks(worksData);
+      setLoading(false);
     })();
   }, []);
 
@@ -74,15 +70,21 @@ const Home: NextPage = () => {
         </div>
         <div css={scroll}>
           <p>scroll</p>
-          <a className="arrow"></a>
+        </div>
+        <div css={arrowContainer}>
+          <ScrollArrow />
         </div>
       </div>
       <div css={worksList}>
-        {works.map((w) => (
-          <div css={worksCard} key={w.id}>
-            <WorksCard work={w} />
-          </div>
-        ))}
+        {works.length ? (
+          works.map((w) => (
+            <div css={worksCard} key={w.id}>
+              <WorksCard work={w} />
+            </div>
+          ))
+        ) : (
+          <>loading</>
+        )}
       </div>
     </Layout>
   );
