@@ -42,10 +42,12 @@ const arrow = css({
 });
 
 const worksList = css({
+  marginTop: 120,
+  marginBottom: 24,
   display: "flex",
   justifyContent: "center",
   flexWrap: "wrap",
-  gap: 12,
+  gap: 24,
 });
 
 const worksCard = css({

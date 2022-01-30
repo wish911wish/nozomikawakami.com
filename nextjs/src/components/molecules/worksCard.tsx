@@ -29,9 +29,8 @@ const WorksCard: React.FC<Props> = (props: Props) => {
         width={300}
         height={200}
       />
-      <p>
-        {props.work.name} at {start}
-      </p>
+      <p>{props.work.name}</p>
+      <p>{start}</p>
     </div>
   );
 };
