@@ -1,73 +1,42 @@
 import * as React from "react";
-import { css } from "@emotion/react";
+import { css, keyframes } from "@emotion/react";
 
-// .loader,
-// .loader:before,
-// .loader:after {
-//   background: #ffffff;
-//   -webkit-animation: load1 1s infinite ease-in-out;
-//   animation: load1 1s infinite ease-in-out;
-//   width: 1em;
-//   height: 4em;
-// }
-// .loader {
-//   color: #ffffff;
-//   text-indent: -9999em;
-//   margin: 88px auto;
-//   position: relative;
-//   font-size: 11px;
-//   -webkit-transform: translateZ(0);
-//   -ms-transform: translateZ(0);
-//   transform: translateZ(0);
-//   -webkit-animation-delay: -0.16s;
-//   animation-delay: -0.16s;
-// }
-// .loader:before,
-// .loader:after {
-//   position: absolute;
-//   top: 0;
-//   content: '';
-// }
-// .loader:before {
-//   left: -1.5em;
-//   -webkit-animation-delay: -0.32s;
-//   animation-delay: -0.32s;
-// }
-// .loader:after {
-//   left: 1.5em;
-// }
-// @-webkit-keyframes load1 {
-//   0%,
-//   80%,
-//   100% {
-//     box-shadow: 0 0;
-//     height: 4em;
-//   }
-//   40% {
-//     box-shadow: 0 -2em;
-//     height: 5em;
-//   }
-// }
-// @keyframes load1 {
-//   0%,
-//   80%,
-//   100% {
-//     box-shadow: 0 0;
-//     height: 4em;
-//   }
-//   40% {
-//     box-shadow: 0 -2em;
-//     height: 5em;
-//   }
-// }
+const load = keyframes([
+  { "0%": { height: 40 } },
+  { "40%": { height: 80 } },
+  { "80%": { height: 40 } },
+  { "100%": { height: 40 } },
+]);
 
-const style = css({});
+const base = css({
+  background: "currentColor",
+  opacity: 0.5,
+  width: 10,
+  height: 40,
+  animation: `${load} 1s infinite ease-in-out`,
+});
+
+const center = css(base, {
+  animationDelay: "-0.16s",
+});
+const right = base;
+const left = css(base, {
+  animationDelay: "-0.32s",
+});
+
+const style = css({
+  height: 100,
+  display: "flex",
+  alignItems: "center",
+  columnGap: 10,
+});
 
 const Loading: React.FC = () => {
   return (
     <div css={style}>
-      <div>sss</div>
-      <div>sss</div>
+      <div css={left} />
+      <div css={center} />
+      <div css={right} />
     </div>
   );
 };
