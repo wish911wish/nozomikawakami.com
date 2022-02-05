@@ -3,8 +3,10 @@ import type { NextPage } from "next";
 import { css } from "@emotion/react";
 import Heading2 from "components/atoms/heading2";
 import Heading4 from "components/atoms/heading4";
+import Loading from "components/atoms/loading";
 import ScrollArrow from "components/molecules/scrollArrow";
 import WorksCard from "components/molecules/worksCard";
+import WorksList from "components/organisms/worksList";
 import Layout from "components/template/layout";
 import Work from "interfaces/work";
 import { getWorks } from "api/works";
@@ -75,17 +77,15 @@ const Home: NextPage = () => {
           <ScrollArrow />
         </div>
       </div>
-      <div css={worksList}>
-        {works.length ? (
-          works.map((w) => (
-            <div css={worksCard} key={w.id}>
-              <WorksCard work={w} />
-            </div>
-          ))
-        ) : (
-          <>loading</>
-        )}
-      </div>
+      {works.length ? (
+        <WorksList works={works} />
+      ) : (
+        <div
+          css={{ display: "flex", justifyContent: "center", paddingBottom: 24 }}
+        >
+          <Loading />
+        </div>
+      )}
     </Layout>
   );
 };

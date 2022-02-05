@@ -9,6 +9,7 @@ type Props = {
 
 const worksCard = css({
   width: "100%",
+  maxWidth: 300,
 });
 
 const WorksCard: React.FC<Props> = (props: Props) => {
