@@ -5,6 +5,9 @@ on:
       - master
       - develop
     types: [closed]
+  push:
+    branches:
+      - develop
 
 defaults:
   run:
@@ -29,6 +32,14 @@ jobs:
           S3_DOWNLOAD_BUCKET: ${{ secrets.S3_DOWNLOAD_BUCKET }}
         run: |
           aws s3 cp s3://$S3_DOWNLOAD_BUCKET/.env.staging ./nextjs  --quiet
+
+      - name: List files
+        run: |
+          ls ./
+
+      - name: List files 2
+        run: |
+          ls nextjs
 
       - name: Output file contents
         run: |
