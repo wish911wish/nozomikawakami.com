@@ -39,7 +39,7 @@ jobs:
 
       - name: List files 2
         run: |
-          ls nextjs
+          ls ./nextjs
 
       - name: Output file contents
         run: |
