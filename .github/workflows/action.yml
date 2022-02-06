@@ -31,6 +31,12 @@ jobs:
         env:
           S3_DOWNLOAD_BUCKET: ${{ secrets.S3_DOWNLOAD_BUCKET }}
         run: |
+          aws s3 cp s3://$S3_DOWNLOAD_BUCKET/.env.staging -
+
+      - name: Download file from S3
+        env:
+          S3_DOWNLOAD_BUCKET: ${{ secrets.S3_DOWNLOAD_BUCKET }}
+        run: |
           aws s3 cp s3://$S3_DOWNLOAD_BUCKET/.env.staging ./nextjs  --quiet
 
       - name: List files
