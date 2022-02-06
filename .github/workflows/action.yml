@@ -20,14 +20,6 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v2
 
-      - name: List files
-        run: |
-          ls ./
-
-      - name: List files 2
-        run: |
-          ls ./nextjs
-
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -45,19 +37,15 @@ jobs:
         env:
           S3_DOWNLOAD_BUCKET: ${{ secrets.S3_DOWNLOAD_BUCKET }}
         run: |
-          aws s3 cp s3://$S3_DOWNLOAD_BUCKET/.env.staging ./nextjs  --quiet
+          aws s3 cp s3://$S3_DOWNLOAD_BUCKET/.env.staging ./  --quiet
 
       - name: List files
         run: |
           ls ./
 
-      - name: List files 2
-        run: |
-          ls ./nextjs
-
       - name: Output file contents
         run: |
-          cat ./nextjs/.env.staging
+          cat ./.env.staging
 
       - name: Setup Node.js
         uses: actions/setup-node@v2
