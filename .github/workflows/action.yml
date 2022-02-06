@@ -20,6 +20,14 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v2
 
+      - name: List files
+        run: |
+          ls ./
+
+      - name: List files 2
+        run: |
+          ls ./nextjs
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
