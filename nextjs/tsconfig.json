@@ -15,7 +15,12 @@
     "jsx": "preserve",
     "incremental": true,
     "jsxImportSource": "@emotion/react",
-    "baseUrl": "src"
+    "baseUrl": "src",
+    "paths": {
+      "@react-pdf/renderer/lib/react-pdf.browser.cjs.js": [
+        "../node_modules/@react-pdf/renderer"
+      ]
+    }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
