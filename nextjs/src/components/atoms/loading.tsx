@@ -1,37 +1,44 @@
 import * as React from "react";
 import { css, keyframes } from "@emotion/react";
 
-const load = keyframes([
-  { "0%": { height: 40 } },
-  { "40%": { height: 80 } },
-  { "80%": { height: 40 } },
-  { "100%": { height: 40 } },
-]);
+type Props = {
+  size?: "sm" | "md";
+};
 
-const base = css({
-  background: "currentColor",
-  opacity: 0.5,
-  width: 10,
-  height: 40,
-  animation: `${load} 1s infinite ease-in-out`,
-});
+const Loading: React.FC<Props> = (props: Props) => {
+  const height = props.size === "sm" ? 50 : 100;
+  const width = props.size === "sm" ? 5 : 10;
+  const load = keyframes([
+    { "0%": { height: height * 0.4 } },
+    { "40%": { height: height * 0.8 } },
+    { "80%": { height: height * 0.4 } },
+    { "100%": { height: height * 0.4 } },
+  ]);
 
-const center = css(base, {
-  animationDelay: "-0.16s",
-});
-const right = base;
-const left = css(base, {
-  animationDelay: "-0.32s",
-});
+  const base = css({
+    background: "currentColor",
+    opacity: 0.5,
+    width: width,
+    height: height * 0.4,
+    animation: `${load} 1s infinite ease-in-out`,
+  });
 
-const style = css({
-  height: 100,
-  display: "flex",
-  alignItems: "center",
-  columnGap: 10,
-});
+  const center = css(base, {
+    animationDelay: "-0.16s",
+  });
+  const right = base;
+  const left = css(base, {
+    animationDelay: "-0.32s",
+  });
 
-const Loading: React.FC = () => {
+  const style = css({
+    height: height,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    columnGap: width,
+  });
+
   return (
     <div css={style}>
       <div css={left} />

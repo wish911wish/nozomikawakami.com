@@ -5,7 +5,7 @@ interface Work {
   periodStart: Date;
   periodEnd: Date | null;
   projectScale: string;
-  role: string;
+  role: string[];
   summary: string;
   technicalSkills: string[];
   url: string;
