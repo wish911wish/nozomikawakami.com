@@ -1,15 +1,17 @@
 import React from "react";
 import type { NextPage } from "next";
+import { PDFDownloadLink } from "@react-pdf/renderer/lib/react-pdf.browser.cjs.js";
 import { css } from "@emotion/react";
 import Heading2 from "components/atoms/heading2";
 import Heading4 from "components/atoms/heading4";
 import Loading from "components/atoms/loading";
 import ScrollArrow from "components/molecules/scrollArrow";
-import WorksCard from "components/molecules/worksCard";
 import WorksList from "components/organisms/worksList";
 import Layout from "components/template/layout";
 import Work from "interfaces/work";
 import { getWorks } from "api/works";
+import CurriculumVitae from "components/organisms/curriculumVitae";
+import CVDownloadLink from "components/molecules/cVDownloadLink";
 
 const mainVisual = css({
   height: "100vh",
@@ -38,28 +40,13 @@ const arrowContainer = css({
   paddingTop: 12,
 });
 
-const worksList = css({
-  padding: "120px 24px 24px 24px",
-  display: "flex",
-  justifyContent: "center",
-  flexWrap: "wrap",
-  gap: 24,
-});
-
-const worksCard = css({
-  width: "100%",
-  maxWidth: 300,
-});
-
 const Home: NextPage = () => {
   const [works, setWorks] = React.useState<Work[]>([]);
-  const [loading, setLoading] = React.useState<boolean>(true);
 
   React.useEffect(() => {
     (async () => {
       const worksData = await getWorks();
       setWorks(worksData);
-      setLoading(false);
     })();
   }, []);
 
@@ -78,13 +65,20 @@ const Home: NextPage = () => {
         </div>
       </div>
       {works.length ? (
-        <WorksList works={works} />
+        <>
+          <PDFDownloadLink
+            document={<CurriculumVitae works={works} />}
+            fileName="職務経歴書_川上望.pdf"
+          >
+            {({ blob, url, loading, error }) =>
+              loading ? <Loading size="sm" /> : <CVDownloadLink />
+            }
+          </PDFDownloadLink>
+
+          <WorksList works={works} />
+        </>
       ) : (
-        <div
-          css={{ display: "flex", justifyContent: "center", paddingBottom: 24 }}
-        >
-          <Loading />
-        </div>
+        <Loading />
       )}
     </Layout>
   );

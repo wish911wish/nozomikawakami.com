@@ -10,7 +10,7 @@ export const getWorks = async (): Promise<Work[]> => {
     periodStart: new Date(r.period_start),
     periodEnd: r.period_end ? new Date(r.period_end) : null,
     projectScale: String(r.project_scale),
-    role: String(r.role),
+    role: String(r.role).split(","),
     summary: String(r.summary),
     technicalSkills: String(r.technical_skills).split(","),
     url: String(r.url),
