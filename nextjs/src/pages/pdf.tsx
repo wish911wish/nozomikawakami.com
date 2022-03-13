@@ -1,36 +1,34 @@
-import React from "react";
 import type { NextPage } from "next";
-import { Page, Text, View, Document } from "@react-pdf/renderer";
+import * as React from "react";
 import {
   PDFViewer,
   PDFDownloadLink,
 } from "@react-pdf/renderer/lib/react-pdf.browser.cjs.js";
-const WorksList: React.FC = () => {
-  return (
-    <Document>
-      <Page size="A4">
-        <View>
-          <Text>Section #1</Text>
-        </View>
-        <View>
-          <Text>Section #2</Text>
-        </View>
-      </Page>
-    </Document>
-  );
-};
+import Work from "interfaces/work";
+import { getWorks } from "api/works";
+import Loading from "components/atoms/loading";
+import CurriculumVitae from "components/organisms/curriculumVitae";
+import CVDownloadLink from "components/molecules/cVDownloadLink";
 
 const Home: NextPage = () => {
+  const [works, setWorks] = React.useState<Work[]>([]);
+
+  React.useEffect(() => {
+    (async () => {
+      const worksData = await getWorks();
+      setWorks(worksData);
+    })();
+  }, []);
+
   return (
     <>
-      <PDFViewer>
-        <WorksList />
-      </PDFViewer>
-      <PDFDownloadLink document={<WorksList />} fileName="somename.pdf">
-        {({ blob, url, loading, error }) =>
-          loading ? "Loading document..." : "Download now!"
-        }
-      </PDFDownloadLink>
+      {works.length ? (
+        <PDFViewer width={"100%"} height={"900px"}>
+          <CurriculumVitae works={works} />
+        </PDFViewer>
+      ) : (
+        <Loading />
+      )}
     </>
   );
 };
